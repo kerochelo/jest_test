@@ -1,8 +1,3 @@
-/*
- * For a detailed explanation regarding each configuration property, visit:
- * https://jestjs.io/docs/configuration
- */
-
 module.exports = {
   // All imported modules in your tests should be mocked automatically
   // automock: false,
@@ -106,7 +101,17 @@ module.exports = {
   // projects: undefined,
 
   // Use this configuration option to add custom reporters to Jest
-  // reporters: undefined,
+  reporters: [
+    'default',
+    [ 'jest-junit', {
+      suiteName: 'jest-tests',
+      outputDirectory: 'tmp',
+      outputName: 'spec_result.xml',
+      classNameTemplate: '{classname} > {title}',
+      titleTemplate: '{classname} > {title}',
+      ancestorSeparator: ' > ',
+    } ]
+  ],
 
   // Automatically reset mock state before every test
   // resetMocks: false,
@@ -135,7 +140,7 @@ module.exports = {
   // setupFiles: [],
 
   // A list of paths to modules that run some code to configure or set up the testing framework before each test
-  // setupFilesAfterEnv: [],
+  setupFilesAfterEnv: ['jest-expect-message'],
 
   // The number of seconds after which a test is considered as slow and reported as such in the results.
   // slowTestThreshold: 5,
